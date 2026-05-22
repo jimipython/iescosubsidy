@@ -72,18 +72,6 @@
       background:#0b5ed7;
     }
 
-    .result{
-      margin-top:20px;
-      word-break:break-word;
-      font-size:14px;
-      display:none;
-    }
-
-    .result a{
-      color:#0d6efd;
-      text-decoration:none;
-    }
-
     .note{
       margin-top:18px;
       font-size:12px;
@@ -101,7 +89,7 @@
     <h1>IESCO Subsidy Link Generator</h1>
 
     <p>
-      Enter your IESCO reference number to generate your PITC subsidy eligibility link.
+      Enter your IESCO reference number to continue.
     </p>
 
     <input
@@ -113,13 +101,11 @@
     />
 
     <button onclick="generateLink()">
-      Generate & Open Link
+      Continue
     </button>
 
-    <div class="result" id="result"></div>
-
     <div class="note">
-      No data is collected, stored, or shared. Everything runs only in your browser.
+      No data is collected or stored. Everything runs in your browser only.
     </div>
 
   </div>
@@ -128,20 +114,14 @@
 
     const input = document.getElementById("refno");
 
-    // Allow numbers only while typing
+    // Allow numbers only
     input.addEventListener("input", function () {
-
-      // Remove everything except numbers
       this.value = this.value.replace(/\D/g, "");
-
     });
 
     function generateLink() {
 
-      let refno = input.value;
-
-      // Extra cleaning before generating link
-      refno = refno.replace(/\D/g, "");
+      let refno = input.value.replace(/\D/g, "");
 
       if(refno.length < 5) {
         alert("Please enter a valid reference number.");
@@ -151,21 +131,8 @@
       const finalLink =
         "https://css.pitc.com.pk/check-eligibility?refno=" + refno;
 
-      const resultDiv = document.getElementById("result");
-
-      resultDiv.style.display = "block";
-
-      resultDiv.innerHTML =
-        "<strong>Generated Link:</strong><br><br>" +
-        "<a href='" + finalLink + "' target='_blank'>" +
-        finalLink +
-        "</a>";
-
-      // Auto Redirect
-      setTimeout(() => {
-        window.location.href = finalLink;
-      }, 1000);
-
+      // Direct redirect (same tab)
+      window.location.href = finalLink;
     }
 
   </script>
